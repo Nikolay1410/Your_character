@@ -1,9 +1,10 @@
 package com.example.yourcharacter;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.Guideline;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -11,8 +12,6 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerColor;
-    private TextView descriptionTemp;
-    private Guideline guideline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,23 +19,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //Assigning elements
         spinnerColor = findViewById(R.id.spinnerColor);
-        descriptionTemp = findViewById(R.id.textViewDescriptionTemp);
-        guideline = findViewById(R.id.guideline);
+        TextView textViewTitle = findViewById(R.id.textViewTitle);
+        String title = "Чаще всего люди отдают предпочтение одному цвету. Вопрос \"Какой твой любимый цвет?\" является одним из самых распространенных. Несмотря на то, что в течение жизни пристрастие к цвету у человека может меняться, все же его любимый цвет может многое рассказать о его характере и эмоциональном складе личности.\n" +
+                "\n" +
+                "Прежде чем выбрать, подумайте, какой цвет ваш любимый ?";
+        textViewTitle.setText(title);
     }
-
-    public void showDescription(View view) {
-        //Get the position of an element
+    public void onClickDesc(View view) {
         int position = spinnerColor.getSelectedItemPosition();
-        String description = getDescriptionByPosition(position);
-        if (description!=null && !description.isEmpty()) {
-            guideline.setGuidelinePercent(0);
-            descriptionTemp.setText(description);
-        }
-    }
-    //Element declaration method
-    private String getDescriptionByPosition(int position){
         String[] descriptions = getResources().getStringArray(R.array.color_description);
-        return descriptions[position];
-    }
+        Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
+        Log.i("kkk", descriptions[position]);
 
+        intent.putExtra("desc", descriptions[position]);
+        startActivity(intent);
+    }
 }

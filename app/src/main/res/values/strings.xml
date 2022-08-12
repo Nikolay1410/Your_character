@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Your character</string>
     <string name="button_find_description">Определить цвет</string>
+    <string name="title">На главную</string>
+    <string name="image_title">Титульная картинка</string>
 
     <string-array name="colors">
         <item>Красный</item>
